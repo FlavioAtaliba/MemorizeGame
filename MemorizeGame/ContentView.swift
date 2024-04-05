@@ -9,16 +9,53 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "cat")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, Universe!")
+        HStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 19)
+                    .stroke(Color.black, lineWidth: 10)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 2)
+                    .foregroundColor(.black)
+                Text("😻").font(.largeTitle)
+                
+            }
+            ZStack {
+                RoundedRectangle(cornerRadius: 19)
+                    .stroke(Color.black, lineWidth: 10)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 2)
+                    .foregroundColor(.black)
+                Text("😻").font(.largeTitle)
+                
+            }
+            ZStack {
+                RoundedRectangle(cornerRadius: 19)
+                    .stroke(Color.black, lineWidth: 10)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 2)
+                    .foregroundColor(.black)
+                Text("😻").font(.largeTitle)
+                
+            }
+            ZStack {
+                RoundedRectangle(cornerRadius: 19)
+                    .stroke(Color.black, lineWidth: 10)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white, lineWidth: 2)
+                    .foregroundColor(.black)
+                Text("😻").font(.largeTitle)
+                
+            }
         }
+        
+        .foregroundColor(.gray)
         .padding()
     }
+    
 }
 
 #Preview {
     ContentView()
 }
+
+ 
