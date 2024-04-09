@@ -11,28 +11,52 @@ struct ContentView: View {
     let emojis = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥"]
     
     @State var cardCount: Int = 4
-                  
+    
     var body: some View {
         VStack{
-            HStack {
-                ForEach(0..<cardCount, id: \.self){ index in
-                    CardView(content: emojis[index])
-                }
-            }
-            .foregroundColor(.black)
-            HStack {
-            Button("Add Card"){
-                cardCount += 1
-            }
-            Spacer()
-            Button("Remove Card"){
-                cardCount -= 1
-            }
-         }
-      }
-      .padding()
+            cards
+            cardCountAdjusters
+        }
+        .padding()
+        .imageScale(.large)
+        .font(.largeTitle)   
     }
     
+    
+    
+    var cardCountAdjusters: some View{
+        HStack {
+            cardAdder
+            Spacer()
+            cardRemover
+        }    }
+    
+    var cards: some View{
+       return HStack{
+            ForEach(0..<cardCount, id: \.self){ index in
+                CardView(content: emojis[index])
+            }
+        }  
+    }
+    
+    var cardRemover: some View{
+        Button(action: {
+            if cardCount < emojis.count{
+                cardCount+=1
+            }
+        }, label: {
+            Image(systemName: "rectangle.stack.badge.plus.fill")
+        }) 
+    }
+    var cardAdder: some View{
+        Button(action: {
+            if cardCount > 1 {
+                cardCount-=1
+            }
+        }, label: {
+            Image(systemName: "rectangle.stack.badge.minus.fill")
+        })   
+    }
 }
 
 struct CardView: View {
@@ -54,8 +78,7 @@ struct CardView: View {
                     base.fill(.black)
             }
         }.onTapGesture {
-//            isFaceup = !isFaceup or by another way below
-            isFaceup.toggle()
+        isFaceup.toggle()
             
         }
     }
