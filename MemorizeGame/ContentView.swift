@@ -20,7 +20,7 @@ struct ContentView: View {
         }
         .padding()
         .imageScale(.large)
-        .font(.largeTitle)   
+        .font(.largeTitle)
     }
     
     
@@ -37,7 +37,7 @@ struct ContentView: View {
             ForEach(0..<cardCount, id: \.self){ index in
                 CardView(content: emojis[index])
             }
-        }  
+        }
     }
     
     func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
@@ -54,7 +54,7 @@ struct ContentView: View {
         
     }
     var cardAdder: some View{
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.minus.plus")
+        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
     }
 }
 
@@ -86,5 +86,3 @@ struct CardView: View {
 #Preview {
     ContentView()
 }
-
- 
