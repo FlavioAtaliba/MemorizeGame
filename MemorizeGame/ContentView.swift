@@ -29,11 +29,12 @@ struct ContentView: View {
     
     var cardCountAdjusters: some View{
         HStack {
-            cardAdder
-            Spacer()
             cardRemover
-        }    }
-    
+            Spacer()
+            cardAdder
+          }
+    }
+        
     var cards: some View{
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]){
             ForEach(0..<cardCount, id: \.self){ index in
