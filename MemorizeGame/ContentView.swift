@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥"]
+    let emojis = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥","🤪"]
     
     @State var cardCount: Int = 4
     
     var body: some View {
         VStack{
+            ScrollView{
             cards
+            }
             Spacer()
             cardCountAdjusters
         }
@@ -33,11 +35,13 @@ struct ContentView: View {
         }    }
     
     var cards: some View{
-        LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]){
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]){
             ForEach(0..<cardCount, id: \.self){ index in
                 CardView(content: emojis[index])
+                    .aspectRatio(2/3,contentMode: .fit)
             }
         }
+        .foregroundColor(.blue)
     }
     
     func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
@@ -49,34 +53,36 @@ struct ContentView: View {
         .disabled(cardCount + offset  < 1 || cardCount + offset > emojis.count)
     }
     
+    var cardAdder: some View{
+        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
+    }
     var cardRemover: some View{
         cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
         
     }
-    var cardAdder: some View{
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
-    }
+    
+    
+    
 }
 
 struct CardView: View {
     let content: String
-    @State var isFaceup: Bool = false
+    @State var isFaceup: Bool = true
     
     var body: some View {
         ZStack {
-            let base = RoundedRectangle(cornerRadius: 19)
-            if isFaceup{
-                    base.stroke(Color.blue, lineWidth: 10)
-                    base.stroke(Color.white, lineWidth: 2)
-                    base.fill(.white)
-                Text(content).font(.largeTitle)
-            }else{
-                    base.stroke(Color.blue, lineWidth: 10)
-                    base.fill(.orange)
-                    base.stroke(Color.black, lineWidth: 2)
-                    base.fill(.black)
+            let base = RoundedRectangle(cornerRadius: 12)
+            Group{
+                    
+                base.fill(.white)
+                base.strokeBorder(lineWidth: 2.5)
+                    Text(content).font(.largeTitle)
             }
-        }.onTapGesture {
+            .opacity(isFaceup ? 1:0)
+            base.fill().opacity(isFaceup ? 0:1)
+            
+        }
+        .onTapGesture {
         isFaceup.toggle()
             
         }
