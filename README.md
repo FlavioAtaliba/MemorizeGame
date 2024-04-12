@@ -1,8 +1,9 @@
-## Funcionalidades Principais
+## Key Features
 
-- **Grade de Cartas Ajustável:** Personalize sua experiência de jogo adicionando ou removendo cartas conforme desejado.
-- **Virar as Cartas:** Descubra os emojis ocultos virando as cartas.
-- **Interface de Usuário Intuitiva:** Desfrute de uma interface de usuário elegante e fácil de usar desenvolvida com SwiftUI.
+- **Adjustable Card Grid:** Customize your gaming experience by adding or removing cards as desired.
+- **Flip Cards:** Uncover hidden emojis by flipping the cards and test your memory skills.
+- **Intuitive User Interface:** Enjoy a sleek and user-friendly interface developed with SwiftUI.
+
 
 ![orientation,schemecolor](https://github.com/FlavioAtaliba/MemorizeGame/assets/72277856/31939f2f-862b-48b1-8878-18e6902e2899)
 
