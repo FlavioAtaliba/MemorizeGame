@@ -8,87 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis = ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥","🤪"]
+    let emojis = ["😊", "🌟", "🎉", "🌈", "🍀", "🌺", "🎈", "🎶", "🎁", "🌼", "🌞", "🌍", "🎨", "📚", "💡", "🍔", "🚀", "🎲", "🎸", "🎭"]
     
-    @State var cardCount: Int = 4
+    @State var emojiCount = 20
     
     var body: some View {
         VStack{
             ScrollView{
-            cards
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 62.9))]){
+                    ForEach(emojis[0..<emojiCount], id: \.self){ emoji in
+                        CardView(content: emoji)
+                            .aspectRatio(2/3, contentMode: .fit)
+                    }
+                }
             }
-            Spacer()
-            cardCountAdjusters
+            .foregroundColor(.blue)
         }
-        .padding()
-        .imageScale(.large)
-        .font(.largeTitle)
+        .padding(.horizontal)
     }
-    
-    
-    
-    var cardCountAdjusters: some View{
-        HStack {
-            cardRemover
-            Spacer()
-            cardAdder
-          }
-    }
-        
-    var cards: some View{
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]){
-            ForEach(0..<cardCount, id: \.self){ index in
-                CardView(content: emojis[index])
-                    .aspectRatio(2/3,contentMode: .fit)
-            }
-        }
-        .foregroundColor(.blue)
-    }
-    
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
-        Button(action: {
-            cardCount += offset
-            },label:{
-            Image(systemName: symbol)
-        })
-        .disabled(cardCount + offset  < 1 || cardCount + offset > emojis.count)
-    }
-    
-    var cardAdder: some View{
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
-    }
-    var cardRemover: some View{
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
-        
-    }
-    
-    
-    
 }
+                    
+      
+                    
 
 struct CardView: View {
-    let content: String
-    @State var isFaceup: Bool = true
+    var content: String
+    @State var isFaceup: Bool = false
     
     var body: some View {
         ZStack {
-            let base = RoundedRectangle(cornerRadius: 12)
-            Group{
-                    
-                base.fill(.white)
-                base.strokeBorder(lineWidth: 2.5)
-                    Text(content).font(.largeTitle)
+            let shape = RoundedRectangle(cornerRadius: 20)
+            if isFaceup{
+                shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: 3)
+                Text(content).font(.largeTitle)
+            } else{
+                shape.fill()
             }
-            .opacity(isFaceup ? 1:0)
-            base.fill().opacity(isFaceup ? 0:1)
-            
         }
         .onTapGesture {
-        isFaceup.toggle()
-            
+            isFaceup = !isFaceup
         }
     }
 }
+                
 
 #Preview {
     ContentView()
