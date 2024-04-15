@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis = ["😊", "🌟", "🎉", "🌈", "🍀", "🌺", "🎈", "🎶", "🎁", "🌼", "🌞", "🌍", "🎨", "📚", "💡", "🍔", "🚀", "🎲", "🎸", "🎭"]
-    
-    @State var emojiCount = 20
+    let viewModel: EmojiMemoryGame
     
     var body: some View {
-        VStack{
-            ScrollView{
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]){
-                    ForEach(emojis[0..<emojiCount], id: \.self){ emoji in
-                        CardView(content: emoji)
-                            .aspectRatio(2/3, contentMode: .fit)
-                    }
+        ScrollView{
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]){
+                ForEach(viewModel.cards){ card in
+                    CardView(card: card)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
                 }
             }
-            .foregroundColor(.blue)
         }
+        .foregroundColor(.blue)
         .padding(.horizontal)
     }
 }
@@ -32,27 +31,29 @@ struct ContentView: View {
                     
 
 struct CardView: View {
-    var content: String
-    @State var isFaceup: Bool = false
+    let card: MemoryGame<String>.Card
     
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
-            if isFaceup{
+            if card.isFaceup{
                 shape.fill().foregroundColor(.white)
                 shape.strokeBorder(lineWidth: 2)
-                Text(content).font(.largeTitle)
+                Text(card.content).font(.largeTitle)
             } else{
                 shape.fill()
             }
-        }
-        .onTapGesture {
-            isFaceup = !isFaceup
         }
     }
 }
                 
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider{
+    static var previews: some View{
+        let game = EmojiMemoryGame()
+        ContentView(viewModel: game)
+            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        ContentView(viewModel: game)
+            .preferredColorScheme(.light)
+    }
 }
