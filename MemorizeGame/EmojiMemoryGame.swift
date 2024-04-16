@@ -8,19 +8,20 @@
 import SwiftUI
 
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     
     static let emojis = ["😊", "🌟", "🎉", "🌈", "🍀", "🌺", "🎈", "🎶", "🎁", "🌼", "🌞", "🌍", "🎨", "📚", "💡", "🍔", "🚀", "🎲", "🎸", "🎭"]
     // static works like a global var in this case, thou can be inicialize before defines model
     // static is a type propertie or type valuable
 
     static func createMemoryGame () -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 4){ pairIndex in EmojiMemoryGame.emojis [pairIndex] }
+        MemoryGame<String>(numberOfPairsOfCards: 10){ pairIndex in EmojiMemoryGame.emojis [pairIndex] }
     // or {pairIndex in emojis[pairIndex] }
     // static is a type function , its cotained in the class itself
     }
     
-    private var model: MemoryGame<String> = createMemoryGame()
+    
+    @Published private var model: MemoryGame<String> = createMemoryGame()
     // is the same as MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     
