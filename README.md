@@ -1,4 +1,4 @@
-## Key Features
+### Key Features
 
 - **Adjustable Card Grid:** Customize your gaming experience by adding or removing cards as desired.
 - **Flip Cards:** Uncover hidden emojis by flipping the cards.
