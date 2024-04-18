@@ -15,7 +15,7 @@ class EmojiMemoryGame: ObservableObject {
     // static is a type propertie or type valuable
 
     static func createMemoryGame () -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 10){ pairIndex in EmojiMemoryGame.emojis [pairIndex] }
+        MemoryGame<String>(numberOfPairsOfCards: 5){ pairIndex in EmojiMemoryGame.emojis [pairIndex] }
     // or {pairIndex in emojis[pairIndex] }
     // static is a type function , its cotained in the class itself
     }
